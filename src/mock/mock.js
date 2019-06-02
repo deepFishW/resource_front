@@ -6,3 +6,8 @@ Mock.mock('/user/login',{
     "token": "admin"
   }
 })
+
+Mock.mock('/user/list',{
+})
+Mock.mock('/table/fenlei', {
+})

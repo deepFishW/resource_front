@@ -15,7 +15,7 @@
   line-height: 45px;
 }
 .el-menu-item{
-  padding: 0 10px;
+  padding: 0 7px;
 }
 .el-menu.el-menu--horizontal{
   border-bottom: solid 0px #e6e6e6;
@@ -29,4 +29,23 @@
 .header_nav{
   margin-bottom: 0;
 }
-
+.logo_icon{
+  width: 230px;
+  height: 45px;
+  margin-right: 20px;
+}
+.search_input {
+  width: 100px;
+}
+.search_input .el-input__inner{
+  height:30px;
+}
+.search_input i{
+  line-height: 30px;
+}
+.search_login{
+  display: inline-block;
+  heigth: 45px;
+  line-height: 45px;
+  position: absolute;
+}
