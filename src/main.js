@@ -9,7 +9,7 @@ import router from './router'
 import store from './store/store'
 import axios from 'axios'
 import './mock/mock.js'
-import api from './api/function.js'
+// import api from './api/functions.js'
 import http from './utils/http.js'
 import './styles/index.scss'
 
@@ -17,7 +17,7 @@ import './icons'
 
 Vue.use(ElementUI);
 Vue.use(axios)
-Vue.prototype.$api = api
+// Vue.prototype.$api = api
 Vue.prototype.$http = http
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false

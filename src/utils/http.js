@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { Loading, Message } from 'element-ui'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
@@ -9,50 +9,29 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    if (store.getters.token) {
+   /* if (store.getters.token) {
       config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-    }
+    }*/
     return config
   },
   error => {
     // Do something with request error
     console.log(error) // for debug
+    Message.error({
+      message: '加载超时'
+    })
     Promise.reject(error)
-  }
-)
+
+  })
 
 // response 拦截器
 service.interceptors.response.use(
   response => {
-    const res = response.data
-    const keys = res.ResultCode
-    if (res.ResultCode === 0) {
-      return response.data
-    } else {
-      if (CodeMaps[keys]) {
-        Message({
-          message: CodeMaps[keys],
-          type: 'error',
-          duration: 5 * 1000
-        })
-        return Promise.reject('error')
-        // return response.data
-      } else {
-        Message({
-          message: '未知错误，请稍后重试',
-          type: 'error',
-          duration: 5 * 1000
-        })
-        return Promise.reject('error')
-      }
-    }
+      return response
   },
   error => {
-    console.log(status)
-    Message({
-      message: error.status,
-      type: 'error',
-      duration: 5 * 1000
+    Message.error({
+      message: '加载失败'
     })
     return Promise.reject(error)
   }

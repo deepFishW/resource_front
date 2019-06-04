@@ -1,5 +1,4 @@
 import request from '@/utils/http'
-
 /**
  * 获取设备列表
  * @param SessionId

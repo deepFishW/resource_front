@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-  import { getResList } from '@/api/function'
+  import { getResList } from '@/api/functions'
 //  import axios from 'axios'
   import demoFilter from '../../components/demo-filter.vue'
   import viewLayout from '../../components/view-layout.vue'
@@ -167,46 +167,19 @@
 
     },
     created() {
-  /*    this.$http.get(this.$api.searchSelect.filter, {}, res => {
-        if (res.success) {
-          this.filterList = res.list2
-          this.viewList = res.list1
-        } else {
-          this.filterList = res.list2
-        }
-      })*/
       getResList().then(response => {
-        console.log(response.data)
-        this.filterList = response.list2
-        this.viewList = response.list1
+        this.filterList = response.data.demo3
+        this.viewList = response.data.demo2
+        console.log(this.filterList)
+        console.log(this.viewList)
       })
-  /*    // 请求数据
-      this.$ajax(this.demo2, this.param, 'get').then(res => {
-        this.viewList = res.list
-        return this.setRequest(this.demo3, this.param, 'get')
-      }).then(res => {
-        this.filterList = res.list
-      })*/
 
     },
     mounted() {
       this.setTime(1000, 0, false)
     },
     methods: {
-      // 封装 axios
- /*     setRequest(url, data = {}, method = 'get') {
-        return new Promise((resolve, reject) => {
-          axios({
-            url,
-            method,
-            data
-          }).then(res => {
-            resolve(res.data)
-          }).catch(err => {
-            reject(err)
-          })
-        })
-      },*/
+
 
       // 获取筛选组件选中的值
       getFilterSelData(data) {
