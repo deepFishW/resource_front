@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/Login/Login'
+import Login from '@/views/login/login'
 import Home from '@/views/Home.vue'
 import HomePage from '@/views/homePage/homePage.vue'
 import ResCatalog from '@/views/resCatalog/resCatalog.vue'
@@ -18,6 +18,14 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: Login,
+      hidden: true,
+      meta: {title: '首页'},
+
+    },
+    {
+      path: '/home',
       name: 'Home',
       component: Home,
       hidden: true,

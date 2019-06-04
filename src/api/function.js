@@ -1,8 +1,14 @@
-export default {
-  sign: {
-    login: '/public/login.do' // 后端登录接口
-  },
-  getData: {
+import request from '@/utils/http'
 
-  }
+/**
+ * 获取设备列表
+ * @param SessionId
+ * @param UserName
+ */
+export function getResList(param) {
+  return request({
+    url: '/resource/list',
+    method: 'get',
+    params: param
+  })
 }

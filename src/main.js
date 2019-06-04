@@ -3,14 +3,16 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import $ from 'jquery'
 import App from './App'
 import router from './router'
 import store from './store/store'
 import axios from 'axios'
+import './mock/mock.js'
 import api from './api/function.js'
 import http from './utils/http.js'
 import './styles/index.scss'
-import './mock/mock.js'
+
 import './icons'
 
 Vue.use(ElementUI);
@@ -19,7 +21,6 @@ Vue.prototype.$api = api
 Vue.prototype.$http = http
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
-
 
 
 new Vue({

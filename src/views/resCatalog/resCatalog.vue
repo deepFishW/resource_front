@@ -1,16 +1,17 @@
 <template>
   <div>
-    <section id="view" clock>
+    <div id="view" clock>
       <demo-filter :get-list="filterList" @get-sel-data="getFilterSelData" @set-time="setTime"></demo-filter>
-      <view-layout :view-data="viewList" width="25%" height="300px" :view-time="viewTime"></view-layout>
+      <view-layout :view-data="viewList"  :view-time="viewTime"></view-layout>
       <pre>
    			选中的数据：{{this.filterSelData}}
    		</pre>
-    </section>
+    </div>
   </div>
 </template>
 <script>
-  import axios from 'axios'
+  import { getResList } from '@/api/function'
+//  import axios from 'axios'
   import demoFilter from '../../components/demo-filter.vue'
   import viewLayout from '../../components/view-layout.vue'
   export default {
@@ -29,127 +30,133 @@
         filterList: [],
         filterSelData: [], // 过滤选中的数据
         demo2:{
-          "list": [{
-            "title": "11"
-          },
+          "list": [
             {
-              "title": "22"
+              "title": "1"
             },
-            {
-              "title": "33"
-            },
-            {
-              "title": "44"
-            },
-            {
-              "title": "55"
-            },
-            {
-              "title": "66"
-            }
-          ]
+              {
+                "title": "2"
+              },
+              {
+                "title": "3"
+              },
+              {
+                "title": "4"
+              },
+              {
+                "title": "5"
+              },
+              {
+                "title": "6"
+              },
+              {
+                "title": "7"
+              },
+              {
+                "title": "8"
+              },
+              {
+                "title": "9"
+              },
+              {
+                "title": "10"
+              },
+            ]
         },
         demo3:{
-          "list": [{
-            "title": "分类：",
+          "list": [
+              {
+            "title": "基础信息资源类别：",
             "childer": [{
-              "value": "全部",
+              "value": "不限",
               "active": true
             },
               {
-                "value": "漂浮素材",
+                "value": "空间地理库",
                 "active": false
               },
               {
-                "value": "效果元素",
+                "value": "人口信息库",
                 "active": false
               },
               {
-                "value": "卡通手绘",
+                "value": "法人信息库",
                 "active": false
               },
               {
-                "value": "装饰图案",
+                "value": "信用专题库",
                 "active": false
               },
               {
-                "value": "图标元素",
-                "active": false
-              },
-              {
-                "value": "促销标签",
-                "active": false
-              },
-              {
-                "value": "边框纹理",
-                "active": false
-              },
-              {
-                "value": "不规则图形",
-                "active": false
-              },
-              {
-                "value": "表情包213123",
-                "active": false
-              },
-              {
-                "value": "表情包2323",
-                "active": false
-              },
-              {
-                "value": "表情包1111",
-                "active": false
-              },
-              {
-                "value": "表情包3333",
-                "active": false
-              },
-              {
-                "value": "表情包444",
+                "value": "电子证件库",
                 "active": false
               }
             ]
           },
             {
-              "title": "格式：",
+              "title": "共享级别：",
               "childer": [{
-                "value": "全部",
+                "value": "不限",
                 "active": true
               },
                 {
-                  "value": "PSD",
+                  "value": "无条件共享",
                   "active": false
                 },
                 {
-                  "value": "AI",
+                  "value": "有条件共享",
                   "active": false
                 },
                 {
-                  "value": "EPS",
+                  "value": "不予共享",
                   "active": false
                 }
               ]
             },
             {
-              "title": "排序：",
+              "title": "主题区域：",
               "childer": [{
-                "value": "推荐",
+                "value": "不限",
                 "active": true
               },
                 {
-                  "value": "昨日热门",
+                  "value": "公共安全",
                   "active": false
                 },
                 {
-                  "value": "最新上传",
+                  "value": "健康保障",
                   "active": false
                 },
                 {
-                  "value": "热门下载",
+                  "value": "社会保障",
                   "active": false
                 },
                 {
-                  "value": "热门收藏",
+                  "value": "食品药品安全",
+                  "active": false
+                },{
+                  "value": "安全生产",
+                  "active": false
+                },{
+                  "value": "价格监督",
+                  "active": false
+                },{
+                  "value": "能源安全",
+                  "active": false
+                },{
+                  "value": "城乡建设",
+                  "active": false
+                },{
+                  "value": "社区治理",
+                  "active": false
+                },{
+                  "value": "生态环保",
+                  "active": false
+                },{
+                  "value": "应急维稳",
+                  "active": false
+                },{
+                  "value": "信用体系",
                   "active": false
                 }
               ]
@@ -160,15 +167,26 @@
 
     },
     created() {
-
-
-      // 请求数据
-      this.setRequest(this.demo2, this.param, 'get').then(res => {
-        this.viewList = [...res.list]
+  /*    this.$http.get(this.$api.searchSelect.filter, {}, res => {
+        if (res.success) {
+          this.filterList = res.list2
+          this.viewList = res.list1
+        } else {
+          this.filterList = res.list2
+        }
+      })*/
+      getResList().then(response => {
+        console.log(response.data)
+        this.filterList = response.list2
+        this.viewList = response.list1
+      })
+  /*    // 请求数据
+      this.$ajax(this.demo2, this.param, 'get').then(res => {
+        this.viewList = res.list
         return this.setRequest(this.demo3, this.param, 'get')
       }).then(res => {
-        this.filterList = [...res.list]
-      })
+        this.filterList = res.list
+      })*/
 
     },
     mounted() {
@@ -176,7 +194,7 @@
     },
     methods: {
       // 封装 axios
-      setRequest(url, data = {}, method = 'get') {
+ /*     setRequest(url, data = {}, method = 'get') {
         return new Promise((resolve, reject) => {
           axios({
             url,
@@ -188,7 +206,7 @@
             reject(err)
           })
         })
-      },
+      },*/
 
       // 获取筛选组件选中的值
       getFilterSelData(data) {
@@ -239,8 +257,8 @@
   }
 
   .view-box {
-    overflow: auto;
-    width: 1220px;
+    /*overflow: auto;*/
+    /*width: 1220px;*/
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -261,9 +279,10 @@
   }
 
   .view-item {
-    height: 100%;
-    border: 1px solid red;
+    border: 1px solid #999999;
     display: flex;
+    width: 205px;
+    height: 251px;
   }
 
   .view-item>span {
@@ -288,7 +307,7 @@
   .demo-warp {
     display: flex;
     max-width: 1200px;
-    margin: auto;
+    /*margin: auto;*/
     height: 100%;
     flex-direction: column;
     padding: 15px 0;
@@ -334,19 +353,22 @@
   }
 
   .demo-active {
-    background-color: #09F;
-    color: white !important;
+    color: #00ab6e!important;
     border-radius: 3px;
+    border: 1px solid #00ab6e;
   }
 
   .demo-tab span:hover {
-    background-color: #09F;
-    color: white;
-    border-radius: 3px;
+    /*background-color: #09F;*/
+    /*color: white;*/
+    /*border-radius: 3px;*/
   }
 
   .demo-hide {
     min-height: 35px;
     height: auto !important;
+  }
+  #view{
+    font-size:14px;
   }
 </style>
